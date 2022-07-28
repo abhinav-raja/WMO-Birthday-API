@@ -1,8 +1,7 @@
 const moment = require('moment');
 
 module.exports = async function(req, res, model) {
-  let name = req.body.name;
-  let birthday = req.body.birthday;
+  const {name, birthday} = req;
   if (!name || !moment(birthday, "DD/MM/YYYY", true).isValid()) {
     res.status(400).json({
       error: "Name or birthday is not valid"

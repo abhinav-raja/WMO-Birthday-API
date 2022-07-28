@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser  = require('body-parser');
 const mongoose = require('mongoose');
 const moment = require('moment');
+const birthdayModel = require('birthdayModel');
 
 //Require all the operation files
 const addEntry = require('./operations/add.js');
@@ -20,14 +21,6 @@ mongoose.connect(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONG
 	useNewUrlParser: true,
 	useUnifiedTopology: true
 });
-
-//Create the schema and model
-let birthdaySchema = new mongoose.Schema({
-  name: {type: String, required: true},
-  birthday: {type: Date, required: true}
-});
-let birthdayModel = new mongoose.model('birthday', birthdaySchema);
-
 
 //POST requests
 app.post('/add', (req, res)=>{

@@ -29,12 +29,14 @@ module.exports = async function(req, res, model){
       };
     })
       .sort((a, b) => a.distance > b.distance);
+    const [nearestBirthdayName, ...rest] = distances;
     let nearestBirthday = await model.findOne({
-      name: distances[0].name
+      name: nearestBirthdayName
     });
+    const {name, birthday} = nearestBirthday;
     res.status(200).json({
-      name: nearestBirthday.name,
-      birthday: nearestBirthday.birthday
+      name, 
+      birthday
     }).end();
   } catch (err) {
     console.log(err);

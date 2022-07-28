@@ -1,5 +1,5 @@
 module.exports = async function(req, res, model){
-  let name = req.body.name;
+  const {name} = req.body;
   if(!name){
     res.status(400).send("Name field blank").end();
     return;

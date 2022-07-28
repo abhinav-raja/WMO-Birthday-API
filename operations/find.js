@@ -1,5 +1,5 @@
 module.exports = async function(req, res, model){
-  let name = req.body.name;
+  let {name} = req.body;
   if(!name){
     res.status(400).send("Name field blank").end();
     return;
@@ -7,9 +7,10 @@ module.exports = async function(req, res, model){
   try{
     let entry = await model.findOne({name: name});
     if(entry){
+      const {name, birthday} = entry;
       res.status(200).send({
-        name: entry.name,
-        birthday: entry.birthday
+       name,
+       birthday
       }).end();
     } else {
       res
